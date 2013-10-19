@@ -18,6 +18,7 @@ git clone git@github.com:abyrcheg/vim-min-ide.git
 
 Copy
 ```
-cp ~/vim-min-ide/.vimrc ~
-cp -r ~/vim-min-ide/.vim ~
+cd vim-min-ide
+cp .vimrc ~
+cp -r .vim ~
 ```
