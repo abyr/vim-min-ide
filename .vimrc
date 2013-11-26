@@ -42,6 +42,9 @@ set novisualbell
 set nobackup
 set noswapfile
 
+" remove unwanted whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
 set encoding=utf8
 
 filetype plugin on
@@ -114,6 +117,19 @@ menu Exit.bdelete :bdelete<CR>
 menu Exit.bdelete! :bdelete!<CR>
 map <F9> :emenu Exit.<Tab>
 
+" switch window
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
+
+" resize horzontal split window
+nmap <silent> <C-S-Down> <C-W>-<C-W>-
+nmap <silent> <C-S-Up> <C-W>+<C-W>+
+" resize vertical split window
+nmap <silent> <C-S-Left> <C-W>><C-W>>
+nmap <silent> <C-S-Right> <C-W><<C-W><
+
 function! InsertTabWrapper(direction)
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
@@ -138,6 +154,7 @@ endif
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
+let g:syntastic_javascript_checkers=['jshint']
 
 set complete=""
 set complete+=.
