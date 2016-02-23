@@ -1,7 +1,10 @@
-"
 " abyr
-"
+
+" execute pathogen#infect()
+
 colorscheme wombat256
+" colorscheme desert
+" colorscheme slate
 
 filetype off
 filetype plugin indent on
@@ -50,32 +53,34 @@ set encoding=utf8
 filetype plugin on
 syntax on
 
-"status line format
+" status line format
 set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P
 set laststatus=2
 
 " Fix <Enter> for comment
 set fo+=cr
 
-"
+
 " hotkeys
-"
 
 " CTRL-F for omni completion
 imap <C-F> <C-X><C-O>
 
 " del line ^+e
-nmap <C-e> dd
-imap <C-e> <esc>ddi
+" map <C-e> dd
+" imap <C-e> <esc>ddi
 
 " copy line ^+d
-nmap <C-d> yypi
-imap <C-d> <esc>yypi
+" nmap <C-d> yypi
+" map <C-d> <esc>yypi
 
 " quick save
-nmap <F2> :w<cr>
-vmap <F2> <esc>:w<cr>i
-imap <F2> <esc>:w<cr>i
+" nmap <F2> :w<cr>
+" vmap <F2> <esc>:w<cr>i
+" imap <F2> <esc>:w<cr>i
+" nmap <C-s> :w<cr>
+" vmap <C-s> <esc>:w<cr>
+" imap <C-s> <esc>:w<cr>i
 
 " F3 - File browser
 nmap <F3> :NERDTreeToggle<cr>
@@ -85,7 +90,6 @@ imap <F3> <esc>:NERDTreeToggle<cr>
 map <F4> :TlistToggle<cr>
 vmap <F4> <esc>:TlistToggle<cr>
 imap <F4> <esc>:TlistToggle<cr>
-
 
 " buffers
 
@@ -105,7 +109,7 @@ vmap <F7> <esc>:bn<cr>i
 imap <F7> <esc>:bn<cr>i
 
 " F8 - PHP syntax check
-map <F8> :!php -l %<cr>
+" map <F8> :!php -l %<cr>
 
 " F9 - exit
 set wildmenu
@@ -146,15 +150,27 @@ inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
 let Tlist_Use_Right_Window   = 1
 
 if &readonly == 1
-    set nofoldenable
-    nmap <F10> :qa<cr>
-    nmap <Esc> :qa!<CR>
-    nmap <Space> <PageDown>
+    set nofoldenable
+    nmap <F10> :qa<cr>
+    nmap <Esc> :qa!<CR>
+    nmap <Space> <PageDown>
 endif
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_javascript_checkers=['jshint']
+
+if exists("g:ctrl_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
+set wildignore+=*.pyc*,*.sql*
+set wildignore+=*/node_modules/*
+set wildignore+=*js-build/*
+set wildignore+=*log*,*.sh*
+set wildignore+=*.py*
+set wildignore+=*.css*
+let g:ctrlp_clear_cache_on_exit=0
 
 set complete=""
 set complete+=.
